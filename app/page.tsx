@@ -123,7 +123,7 @@ export default function SaaSLandingPage() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="mb-2">"{testimonial.content}"</p>
+                    <p className="mb-2">{`"${testimonial.content}"`}</p>
                     <p className="font-semibold">{testimonial.name}</p>
                     <p className="text-sm text-gray-500">{testimonial.role}</p>
                   </CardContent>
