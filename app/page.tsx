@@ -1,170 +1,112 @@
-import Link from "next/link"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, Star, MountainIcon } from "lucide-react"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { ChevronDown, Filter, Plus, Search } from "lucide-react"
 
-export default function SaaSLandingPage() {
+export default function Dashboard() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center">
-        <Link className="flex items-center justify-center" href="#">
-          <MountainIcon className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#features">
-            Features
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#pricing">
-            Pricing
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#testimonials">
-            Testimonials
-          </Link>
-          <Button variant="outline">Sign In</Button>
+    <div className="flex h-screen bg-white">
+      {/* Sidebar */}
+      <aside className="w-64 bg-blue-700 text-white">
+        <div className="p-4">
+          <h1 className="text-2xl font-bold">Superladder</h1>
+        </div>
+        <nav className="mt-4">
+          {["Dashboard", "Job Tracker", "Resume Builder", "Contacts", "Documents", "LinkedIn", "Community", "Find Recruiters"].map((item) => (
+            <a key={item} href="#" className="block px-4 py-2 text-blue-100 hover:bg-blue-600 transition duration-150">
+              {item}
+            </a>
+          ))}
         </nav>
-      </header>
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Revolutionize Your Workflow
-                </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Streamline your business processes, boost productivity, and drive growth with our cutting-edge SaaS platform.
-                </p>
+      </aside>
+
+      {/* Main content */}
+      <main className="flex-1 overflow-auto">
+        {/* Header */}
+        <header className="bg-white border-b border-blue-100 p-4 flex justify-between items-center shadow-sm">
+          <div className="flex items-center space-x-4">
+            <Button variant="outline" className="text-blue-600 border-blue-300 hover:bg-blue-50">
+              AI Tools <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Button className="bg-blue-600 text-white hover:bg-blue-700">Upgrade to Premium</Button>
+            <Avatar>
+              <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User avatar" />
+              <AvatarFallback>UN</AvatarFallback>
+            </Avatar>
+          </div>
+        </header>
+
+        {/* Dashboard content */}
+        <div className="p-6 bg-blue-50">
+          <h2 className="text-2xl font-semibold mb-4 text-blue-900">All Resumes</h2>
+          
+          {/* Search and filter */}
+          <div className="flex justify-between mb-4">
+            <div className="flex space-x-2">
+              <Input placeholder="Search" className="w-64 border-blue-200 focus:border-blue-500 focus:ring-blue-500" />
+              <Button variant="outline" className="text-blue-600 border-blue-300 hover:bg-blue-100">
+                <Search className="mr-2 h-4 w-4" /> Search
+              </Button>
+            </div>
+            <div className="flex space-x-2">
+              <Button variant="outline" className="text-blue-600 border-blue-300 hover:bg-blue-100">
+                <Filter className="mr-2 h-4 w-4" /> Filter
+              </Button>
+              <Button className="bg-blue-600 text-white hover:bg-blue-700">
+                <Plus className="mr-2 h-4 w-4" /> Create New Resume
+              </Button>
+            </div>
+          </div>
+
+          {/* Modified middle panel with 2 inputs and 1 output */}
+          <div className="bg-white p-6 rounded-lg shadow-md mb-6 border border-blue-200">
+            <h3 className="text-lg font-semibold mb-4 text-blue-800">Resume Generator</h3>
+            <div className="space-y-4">
+              <Input placeholder="Enter job title" className="border-blue-200 focus:border-blue-500 focus:ring-blue-500" />
+              <Input placeholder="Enter years of experience" className="border-blue-200 focus:border-blue-500 focus:ring-blue-500" />
+              <div className="p-4 bg-blue-50 rounded-md border border-blue-200">
+                <p className="font-medium text-blue-800">Generated Resume Summary:</p>
+                <p className="text-sm text-blue-600 mt-2">Your generated resume summary will appear here...</p>
               </div>
-              <div className="w-full max-w-sm space-y-2">
-                <form className="flex space-x-2">
-                  <Input className="max-w-lg flex-1" placeholder="Enter your email" type="email" />
-                  <Button type="submit">Get Started</Button>
-                </form>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Start your 14-day free trial. No credit card required.
-                </p>
-              </div>
             </div>
           </div>
-        </section>
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Key Features</h2>
-            <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
-              {[
-                { title: "Automated Workflows", description: "Save time and reduce errors with our intelligent automation." },
-                { title: "Real-time Analytics", description: "Make data-driven decisions with our powerful analytics tools." },
-                { title: "Seamless Integrations", description: "Connect with your favorite tools for a unified experience." },
-              ].map((feature) => (
-                <Card key={feature.title}>
-                  <CardHeader>
-                    <CardTitle>{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{feature.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Flexible Pricing</h2>
-            <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
-              {[
-                { name: "Starter", price: "$29", features: ["Basic features", "Up to 5 users", "5GB storage"] },
-                { name: "Pro", price: "$79", features: ["Advanced features", "Up to 20 users", "50GB storage"] },
-                { name: "Enterprise", price: "Custom", features: ["All features", "Unlimited users", "Unlimited storage"] },
-              ].map((plan) => (
-                <Card key={plan.name} className="flex flex-col justify-between">
-                  <CardHeader>
-                    <CardTitle>{plan.name}</CardTitle>
-                    <p className="text-3xl font-bold">{plan.price}</p>
-                    {plan.name !== "Enterprise" && <p className="text-sm text-gray-500">per month</p>}
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {plan.features.map((feature) => (
-                        <li key={feature} className="flex items-center">
-                          <CheckCircle className="mr-2 h-4 w-4 text-green-500" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                  <div className="p-6 pt-0">
-                    <Button className="w-full" variant={plan.name === "Pro" ? "default" : "outline"}>
-                      {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
-                    </Button>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">What Our Customers Say</h2>
-            <div className="grid gap-6 lg:grid-cols-3 lg:gap-12">
-              {[
-                { name: "Alex Johnson", role: "CEO, TechCorp", content: "This platform has transformed our business operations. Highly recommended!" },
-                { name: "Sarah Lee", role: "Marketing Director, GrowthCo", content: "The analytics features are game-changing. We've seen a 40% increase in productivity." },
-                { name: "Michael Brown", role: "CTO, InnovateTech", content: "The best SaaS solution we've used. The integrations are seamless and the support is top-notch." },
-              ].map((testimonial) => (
-                <Card key={testimonial.name}>
-                  <CardHeader>
-                    <div className="flex items-center space-x-2">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-5 h-5 fill-current text-yellow-500" />
-                      ))}
+
+          {/* Table */}
+          <div className="bg-white rounded-lg shadow-md border border-blue-200">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-blue-50">
+                  <TableHead className="text-blue-900">Resume Title</TableHead>
+                  <TableHead className="text-blue-900">Score</TableHead>
+                  <TableHead className="text-blue-900">Created</TableHead>
+                  <TableHead className="text-blue-900">Modified</TableHead>
+                  <TableHead className="text-blue-900">Job Title</TableHead>
+                  <TableHead className="text-blue-900">Company Name</TableHead>
+                  <TableHead className="text-blue-900">Source</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow className="hover:bg-blue-50">
+                  <TableCell className="font-medium">Account Executive</TableCell>
+                  <TableCell>
+                    <div className="w-16 h-2 bg-blue-100 rounded">
+                      <div className="w-12 h-2 bg-blue-500 rounded"></div>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-2">{`"${testimonial.content}"`}</p>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  </TableCell>
+                  <TableCell>Aug 31, 2024</TableCell>
+                  <TableCell>Aug 31, 2024</TableCell>
+                  <TableCell>Account Executive</TableCell>
+                  <TableCell></TableCell>
+                  <TableCell>Resume</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
-        </section>
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Ready to Get Started?</h2>
-                <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Join thousands of satisfied customers and take your business to the next level.
-                </p>
-              </div>
-              <div className="w-full max-w-sm space-y-2">
-                <form className="flex space-x-2">
-                  <Input className="max-w-lg flex-1" placeholder="Enter your email" type="email" />
-                  <Button type="submit">Start Free Trial</Button>
-                </form>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  14-day free trial, no credit card required.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500 dark:text-gray-400">© 2023 Acme Inc. All rights reserved.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Terms of Service
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Privacy
-          </Link>
-        </nav>
-      </footer>
     </div>
   )
 }
